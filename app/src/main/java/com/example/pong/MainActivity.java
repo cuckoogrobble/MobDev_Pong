@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -15,6 +17,9 @@ import android.widget.TextView;
 
 import com.example.pong.custiomView.Ball;
 import com.example.pong.custiomView.Paddle;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,16 +46,22 @@ public class MainActivity extends AppCompatActivity {
     private float ballX, ballY;
 
     //Speed
-
+    private int paddleLeftSpeed;
     //Score
+
+    //Timer
+    private Timer timer;
+    private Handler handler = new Handler();
 
     //Status
     private boolean start_flag = false;
     private boolean action_flag = false;
+    private boolean up_flag = false;
+
+    //Sound
 
     //Start Button
     private Button startButton;
-
 
 
     @Override
@@ -69,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         scoreLeft.setVisibility(View.INVISIBLE);
     }
 
-    protected void ini(){
+    protected void ini() {
         gameFrame = findViewById(R.id.gameFrame);
         startLayout = findViewById(R.id.startLayout);
         net = findViewById(R.id.net);
@@ -84,20 +95,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void startGame(View view){
+    public void startGame(View view) {
         start_flag = true;
 
         // getting frameHeight and frameWidth
-        if (frameHeight == 0){
+        if (frameHeight == 0) {
             frameHeight = gameFrame.getHeight();
             frameWidth = gameFrame.getWidth();
             paddleHeight = paddleLeft.getHeight();
             paddleWidth = paddleLeft.getWidth();
         }
 
-        //initial positions
-        paddleLeftY = frameHeight / 2 - paddleHeight/2;
-        paddleRightY = frameHeight /2 - paddleHeight/2;
+        //initial positions         last - paddleHeight bc of my phone
+        paddleLeftY = frameHeight / 2 - paddleHeight / 2;
+        paddleRightY = frameHeight / 2 - paddleHeight / 2;
         paddleLeftX = paddleWidth;
         paddleRightX = frameWidth - 2 * paddleWidth;
 
@@ -124,11 +135,66 @@ public class MainActivity extends AppCompatActivity {
         scoreRight.setVisibility(View.VISIBLE);
         scoreLeft.setVisibility(View.VISIBLE);
 
+        //Set Timer
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (start_flag) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            move();
+                        }
+                    });
+                }
+            } // call move() every 20 ms
+        }, 0, 100);
+
+
         //Initialize score
 
 
     }
 
+    private void move() {
 
+        if (action_flag) {
+            //touching
+            paddleLeftY += 5;
+        } else {
+            //releasing
+            paddleLeftY -= 5;
+        }
+
+        //check  paddle position
+        if (paddleLeftY < 0) {
+            paddleLeftY = 0;
+        }
+
+        if (paddleLeftY > frameHeight - paddleHeight) {
+            paddleLeftY = frameHeight - paddleHeight;
+        }
+
+        paddleLeft.setY(paddleLeftY);
+
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        if (start_flag) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                action_flag = true;
+
+            } else if (event.getAction() == MotionEvent.ACTION_UP){
+                action_flag = false;
+            }
+        }
+        return super.onTouchEvent(event);
+
+    }
 
 }

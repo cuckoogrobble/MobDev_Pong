@@ -40,20 +40,20 @@
 
         <com.example.pong.custiomView.Ball
             android:id="@+id/ball"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:background="@color/colorPrimary"/>
 
         <com.example.pong.custiomView.Paddle
             android:id="@+id/paddleRight"
-            android:layout_width="20dp"
-            android:layout_height="80dp"
+            android:layout_width="10dp"
+            android:layout_height="50dp"
             android:background="@color/colorAccent"/>
 
         <com.example.pong.custiomView.Paddle
             android:id="@+id/paddleLeft"
-            android:layout_width="20dp"
-            android:layout_height="80dp"
+            android:layout_width="10dp"
+            android:layout_height="50dp"
             android:background="@color/colorOrange"/>
 
         <View
