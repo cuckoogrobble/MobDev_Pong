@@ -49,7 +49,7 @@ public class Paddle extends View {
     @Override
     protected void onDraw(Canvas canvas){
 
-
+/*
         paddle1.left = 10;
         paddle1.top = 500;
         paddle1.right = paddle1.left + PADDLE_WIDTH;
@@ -67,6 +67,6 @@ public class Paddle extends View {
 
 
         paint.setColor(Color.BLUE);
-        canvas.drawRect(paddle2, paint2);
+        canvas.drawRect(paddle2, paint2);*/
     }
 }

@@ -1,81 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    
-    <com.example.pong.custiomView.Ball
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <TextView
+            android:id="@+id/score1pl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/score1"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
 
-    <com.example.pong.custiomView.Paddle
+        <TextView
+            android:id="@+id/score2pl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/score2"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+    <FrameLayout
+        android:id="@+id/gameFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <com.example.pong.custiomView.Ball
+            android:id="@+id/ball"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@color/colorPrimary"/>
+
+        <com.example.pong.custiomView.Paddle
+            android:id="@+id/paddleRight"
+            android:layout_width="20dp"
+            android:layout_height="80dp"
+            android:background="@color/colorAccent"/>
+
+        <com.example.pong.custiomView.Paddle
+            android:id="@+id/paddleLeft"
+            android:layout_width="20dp"
+            android:layout_height="80dp"
+            android:background="@color/colorOrange"/>
+
+        <View
+            android:id="@+id/net"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+        </View>
+
+        <LinearLayout
+            android:id="@+id/startLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/gameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="35sp"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/author_name"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/startButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/startButton"
+                android:layout_marginTop="100dp"
+                android:onClick="startGame"/>
 
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/score1"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.32"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.073" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/score2"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.073" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="206dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="31dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="246dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="248dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>

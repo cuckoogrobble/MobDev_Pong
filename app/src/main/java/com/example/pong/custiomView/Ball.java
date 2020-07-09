@@ -45,7 +45,7 @@ public class Ball extends View {
     @Override
     protected void onDraw (Canvas canvas){
 
-        Rect rect = new Rect();
+/*        Rect rect = new Rect();
         rect.left = X;
         rect.top = Y;
         rect.right = rect.left + BALL_SIZE;
@@ -53,6 +53,6 @@ public class Ball extends View {
 
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
-        canvas.drawRect(rect, paint);
+        canvas.drawRect(rect, paint);*/
     }
 }
