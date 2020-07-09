@@ -63,13 +63,10 @@ public class MainActivity extends AppCompatActivity {
         //Set visibility  --> GONE: cant see it, and doesn't take any space in Layout, INVISIBLE: cant see it but it has space in Layout
         net.setVisibility(View.INVISIBLE);
         ball.setVisibility(View.INVISIBLE);
-
-
-
-/*        //doesnt play much of a role yet
-        Ball ball = new Ball(this);
-        Paddle paddle1 = new Paddle(this , 10, 500);
-        Paddle paddle2 = new Paddle(this, 2500, 500);*/
+        paddleRight.setVisibility(View.INVISIBLE);
+        paddleLeft.setVisibility(View.INVISIBLE);
+        scoreRight.setVisibility(View.INVISIBLE);
+        scoreLeft.setVisibility(View.INVISIBLE);
     }
 
     protected void ini(){
@@ -84,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         gameTitle = findViewById(R.id.gameTitle);
         authorTitle = findViewById(R.id.author);
         startButton = findViewById(R.id.startButton);
+
     }
 
     public void startGame(View view){
@@ -98,19 +96,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //initial positions
-        paddleLeftY = frameHeight / 2;
-        paddleRightY = frameHeight /2;
+        paddleLeftY = frameHeight / 2 - paddleHeight/2;
+        paddleRightY = frameHeight /2 - paddleHeight/2;
         paddleLeftX = paddleWidth;
         paddleRightX = frameWidth - 2 * paddleWidth;
 
-        ballX = frameHeight / 2;
-        ballY = frameWidth / 2;
-
-        paddleLeft.setY(paddleLeftY);
         paddleLeft.setX(paddleLeftX);
-
-        paddleRight.setY(paddleRightY);
+        paddleLeft.setY(paddleLeftY);
         paddleRight.setX(paddleRightX);
+        paddleRight.setY(paddleRightY);
+
+
+        ballX = frameWidth / 2;
+        ballY = frameHeight / 2;
 
         ball.setY(ballY);
         ball.setX(ballX);
@@ -121,6 +119,10 @@ public class MainActivity extends AppCompatActivity {
         startButton.setVisibility(View.INVISIBLE);
         authorTitle.setVisibility(View.INVISIBLE);
         gameTitle.setVisibility(View.INVISIBLE);
+        paddleLeft.setVisibility(View.VISIBLE);
+        paddleRight.setVisibility(View.VISIBLE);
+        scoreRight.setVisibility(View.VISIBLE);
+        scoreLeft.setVisibility(View.VISIBLE);
 
         //Initialize score
 

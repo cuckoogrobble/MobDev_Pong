@@ -61,7 +61,7 @@
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@color/colorAccent"
+            android:background="@color/colorBlack"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
