@@ -3,13 +3,10 @@ package com.example.pong;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -31,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     //Game Elements
     private Ball ball;
     private Paddle paddleLeft, paddleRight;
-    private TextView scoreLeft, scoreRight, gameTitle, authorTitle;
+    private TextView scoreLeftText, scoreRightText, gameTitle, authorTitle, gameOverText;
     private View net;
 
     //Size
@@ -47,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Speed
     private int paddleLeftSpeed;
+
     //Score
+    private int scoreLeft = 0;
+    private int scoreRight = 0;
 
     //Timer
     private Timer timer;
@@ -76,8 +76,9 @@ public class MainActivity extends AppCompatActivity {
         ball.setVisibility(View.INVISIBLE);
         paddleRight.setVisibility(View.INVISIBLE);
         paddleLeft.setVisibility(View.INVISIBLE);
-        scoreRight.setVisibility(View.INVISIBLE);
-        scoreLeft.setVisibility(View.INVISIBLE);
+        scoreRightText.setVisibility(View.INVISIBLE);
+        scoreLeftText.setVisibility(View.INVISIBLE);
+        gameOverText.setVisibility(View.INVISIBLE);
     }
 
     protected void ini() {
@@ -87,15 +88,20 @@ public class MainActivity extends AppCompatActivity {
         ball = findViewById(R.id.ball);
         paddleLeft = findViewById(R.id.paddleLeft);
         paddleRight = findViewById(R.id.paddleRight);
-        scoreLeft = findViewById(R.id.score1pl);
-        scoreRight = findViewById(R.id.score2pl);
+        scoreLeftText = findViewById(R.id.score1pl);
+        scoreRightText = findViewById(R.id.score2pl);
         gameTitle = findViewById(R.id.gameTitle);
         authorTitle = findViewById(R.id.author);
         startButton = findViewById(R.id.startButton);
+        gameOverText = findViewById(R.id.gameOverText);
 
     }
 
     public void startGame(View view) {
+
+        //set score to 0
+        resetScore();
+
         start_flag = true;
 
         // getting frameHeight and frameWidth
@@ -132,8 +138,9 @@ public class MainActivity extends AppCompatActivity {
         gameTitle.setVisibility(View.INVISIBLE);
         paddleLeft.setVisibility(View.VISIBLE);
         paddleRight.setVisibility(View.VISIBLE);
-        scoreRight.setVisibility(View.VISIBLE);
-        scoreLeft.setVisibility(View.VISIBLE);
+        scoreRightText.setVisibility(View.VISIBLE);
+        scoreLeftText.setVisibility(View.VISIBLE);
+        gameOverText.setVisibility(View.INVISIBLE);
 
         //Set Timer
 
@@ -146,6 +153,11 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             move();
+
+                            if (scoreLeft == 1 || scoreRight == 1){
+                                gameStop();
+
+                            }
                         }
                     });
                 }
@@ -158,28 +170,80 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void move() {
+    private void resetScore() {
+        scoreLeft = scoreRight = 0;
+        scoreLeftText.setText(""+scoreLeft);
+        scoreRightText.setText(""+scoreRight);
+    }
+
+    public void gameStop() {
+
+        start_flag = false;
+        startLayout.setVisibility(View.VISIBLE);
+        ball.setVisibility(View.INVISIBLE);
+        paddleLeft.setVisibility(View.INVISIBLE);
+        paddleRight.setVisibility(View.INVISIBLE);
+        net.setVisibility(View.INVISIBLE);
+        startButton.setVisibility(View.VISIBLE);
+        gameTitle.setVisibility(View.VISIBLE);
+        authorTitle.setVisibility(View.VISIBLE);
+        gameOverText.setVisibility(View.VISIBLE);
+
+    }
+
+    public void move() {
+
+        //moving ball up left
+
+        ballX -= 5;
+        ballY -= 5;
+
+        //point for right paddle user and restart the game
+        if (ballX < 0 ){
+            scoreRight++;
+
+            //update right score
+            scoreRightText.setText(""+scoreRight);
+
+            gameRestart();
+        }
+
+        //point for left paddle user and restart the game
+        if  (ballX > frameWidth){
+            scoreLeft++;
+
+            //update left score
+            scoreLeftText.setText(""+scoreLeft);
+
+            gameRestart();
+        }
+
+
+
+        ball.setX(ballX);
+        ball.setY(ballY);
+
+
+
+
+
+
+        //moving paddle
 
         if (action_flag) {
-            //touching
+            //touching  - moving down
             paddleLeftY += 5;
         } else {
-            //releasing
+            //releasing - moving up
             paddleLeftY -= 5;
         }
 
-        //check  paddle position
-        if (paddleLeftY < 0) {
-            paddleLeftY = 0;
-        }
+        //check paddle position to set it within the limits
+        if (paddleLeftY < 0) paddleLeftY = 0;
+        if (paddleLeftY > frameHeight - paddleHeight) paddleLeftY = frameHeight - paddleHeight;
 
-        if (paddleLeftY > frameHeight - paddleHeight) {
-            paddleLeftY = frameHeight - paddleHeight;
-        }
-
+        //move paddle
         paddleLeft.setY(paddleLeftY);
-
-
     }
 
     @Override
@@ -194,6 +258,21 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return super.onTouchEvent(event);
+
+    }
+
+    private void changeXDir(){
+        ballX += 12;
+    }
+
+    private void gameRestart(){
+        //start from the middle
+        ballX = (float)Math.floor(frameWidth/2);
+        //start randomly from the middle
+        ballY = (float)Math.floor(Math.random()*(frameHeight - ball.getHeight()));
+
+        ball.setX(ballX);
+        ball.setY(ballY);
 
     }
 

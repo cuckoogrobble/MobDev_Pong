@@ -92,12 +92,21 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp"/>
 
+            <TextView
+                android:id="@+id/gameOverText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gameOver"
+                android:textSize="42dp"
+                android:layout_marginTop="10dp"/>
+
+
             <Button
                 android:id="@+id/startButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/startButton"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="50dp"
                 android:onClick="startGame"/>
 
 
