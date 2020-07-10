@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private int paddleLeftSpeed;
 
     //Ball Velocity and Speed
-    private int xVel = -1 , yVel = -1, Speed = 20;
+    private int xVel, yVel, Speed;
 
     //Score
     private int scoreLeft = 0;
@@ -97,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
         authorTitle = findViewById(R.id.author);
         startButton = findViewById(R.id.startButton);
         gameOverText = findViewById(R.id.gameOverText);
+
+        //initialize ball speed and velocity
+        Speed = 20;
+        newBall();
+
 
     }
 
