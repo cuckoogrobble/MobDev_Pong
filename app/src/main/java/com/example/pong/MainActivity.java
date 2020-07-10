@@ -224,6 +224,10 @@ public class MainActivity extends AppCompatActivity {
             newBall();
         }
 
+        if (ballY < 0  || ballY > frameHeight - ball.getHeight()/2){
+            changeYDir();
+        }
+
 
 
         ball.setX(ballX);
@@ -268,7 +272,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeXDir(){
-        ballX += 12;
+        xVel *=-1;
+    }
+
+    private void changeYDir(){
+        yVel *=-1;
     }
 
     private void newBall(){
