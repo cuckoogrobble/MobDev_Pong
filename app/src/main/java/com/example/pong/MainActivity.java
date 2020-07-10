@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //initial positions
+        //paddles
         paddleLeftY = frameHeight / 2 - paddleHeight / 2;
         paddleRightY = frameHeight / 2 - paddleHeight / 2;
         paddleLeftX = paddleWidth;
@@ -160,13 +161,21 @@ public class MainActivity extends AppCompatActivity {
         paddleRight.setX(paddleRightX);
         paddleRight.setY(paddleRightY);
 
-
+        //Ball
         ballX = frameWidth / 2;
         ballY = frameHeight / 2;
 
         ball.setY(ballY);
         ball.setX(ballX);
 
+        //Scores
+        int scoreTextHeight = scoreLeftText.getHeight();
+
+        scoreLeftText.setX(frameWidth/2 - frameWidth/4);
+        scoreLeftText.setY(scoreTextHeight/2);
+
+        scoreRightText.setX(frameWidth/2 + frameWidth/4);
+        scoreRightText.setY(scoreTextHeight/2);
 
         //Set visibility
         net.setVisibility(View.VISIBLE);
