@@ -114,11 +114,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         timerText.setVisibility(View.INVISIBLE);
         gameOverText.setVisibility(View.INVISIBLE);
 
-        Log.d(TAG, "onCreate: Initializing Sensor Services");
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //Permission to use the sensor
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //getting the accelerometer sensor
-        sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.d(TAG, "onCreate: Registered accelerometer listener");
     }
 
     @Override
@@ -129,7 +124,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent event) {
         Log.d(TAG, "onSensorChanged: Y: "+ event.values[1]);
+        paddleLeftY += event.values[1];
 
+        if (paddleLeftY < 0) paddleLeftY = 0;
+        if (paddleLeftY > frameHeight - paddleHeight) paddleLeftY = frameHeight - paddleHeight;
+        paddleLeft.setY(paddleLeftY*paddleLeftSpeed);
     }
 
     protected void ini() {
@@ -158,14 +157,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         newBall();
 
         //initialize paddle speed
-        paddleLeftSpeed = 20;
+        paddleLeftSpeed = 15;
         paddleRightSpeed = 25;
 
         //get ball height
         ballHeight = ball.getHeight();
 
         //game speed
-        gameSpeed = 50;
+        gameSpeed = 30;
 
 
         //ini random right paddle velocity
@@ -180,10 +179,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void startGame(View view) {
 
         //I thought this would help with game speed, but apparently not
-        ini();
+        //ini();
         //This also doesnt help
-        gameSpeed = 50;
-        speed = 20; // also not
+       // gameSpeed = 50;
+       // speed = 20; // also not
 
         //set score to 0
         resetScore();
@@ -270,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         public void run() {
                             move();
 
-                            if (scoreLeft == 5 || scoreRight == 5){
+                            if (scoreLeft == 15 || scoreRight == 15){
                                 gameStop();
 
                             }
@@ -280,6 +279,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             } // call move(),  every gameSpeed ms, now 50 ms.
         }, 0, gameSpeed);
 
+
+        //Setting accelerometer
+
+        Log.d(TAG, "startGame:  Initializing Sensor Services");
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //Permission to use the sensor
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //getting the accelerometer sensor
+        sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+        Log.d(TAG, "startGame: Registered accelerometer listener");
 
 
     }
@@ -388,21 +395,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
         //moving paddle
-
+/*
+//Touch
         if (action_flag) {
             //touching  - moving down
             paddleLeftY += paddleLeftSpeed;
         } else {
             //releasing - moving up
             paddleLeftY -= paddleLeftSpeed;
-        }
+        }*/
+
+
 
         //check paddle position to set it within the limits
-        if (paddleLeftY < 0) paddleLeftY = 0;
-        if (paddleLeftY > frameHeight - paddleHeight) paddleLeftY = frameHeight - paddleHeight;
+
 
         //move paddle
-        paddleLeft.setY(paddleLeftY);
+        //touch
+     //  paddleLeft.setY(paddleLeftY);
     }
 
     @Override
