@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         if (paddleLeftY < 0) paddleLeftY = 0;
         if (paddleLeftY > frameHeight - paddleHeight) paddleLeftY = frameHeight - paddleHeight;
-        paddleLeft.setY(paddleLeftY*paddleLeftSpeed);
+        paddleLeft.setY(paddleLeftY);
     }
 
     protected void ini() {
@@ -153,12 +153,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         startTime = System.currentTimeMillis() / 1000;
 
         //initialize ball speed and velocity
-        speed = 20;
+        speed = 5;
         newBall();
 
         //initialize paddle speed
         paddleLeftSpeed = 15;
-        paddleRightSpeed = 25;
+        paddleRightSpeed = 10;
 
         //get ball height
         ballHeight = ball.getHeight();
