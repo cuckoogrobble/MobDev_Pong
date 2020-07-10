@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     //Game Elements
     private Ball ball;
     private Paddle paddleLeft, paddleRight;
-    private TextView scoreLeftText, scoreRightText, gameTitle, authorTitle, gameOverText, hitsText, hits1pl,hits2pl;
+    private TextView scoreLeftText, scoreRightText, gameTitle, authorTitle, gameOverText, hitsText, hits1pl,hits2pl, timerText;
     private View net;
 
     //Size
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         hitsText = findViewById(R.id.hitsText);
         hits1pl = findViewById(R.id.hits1pl);
         hits2pl = findViewById(R.id.hits2pl);
+        timerText = findViewById(R.id.timerText);
         gameTitle = findViewById(R.id.gameTitle);
         authorTitle = findViewById(R.id.author);
         startButton = findViewById(R.id.startButton);
@@ -196,6 +197,10 @@ public class MainActivity extends AppCompatActivity {
         hits2pl.setX(frameWidth/2 + frameWidth/4);
         hits2pl.setY(frameHeight - hitsHeight - hitsHeight/2);
 
+        //TIMER
+        timerText.setX(frameWidth - 2 * (timerText.getWidth()));
+        timerText.setY(0);
+
         //Set visibility
         net.setVisibility(View.VISIBLE);
         ball.setVisibility(View.VISIBLE);
@@ -209,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
         hitsText.setVisibility(View.VISIBLE);
         hits1pl.setVisibility(View.VISIBLE);
         hits2pl.setVisibility(View.VISIBLE);
+        timerText.setVisibility(View.VISIBLE);
         gameOverText.setVisibility(View.INVISIBLE);
 
         //Set Timer
