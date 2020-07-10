@@ -36,13 +36,14 @@ public class MainActivity extends AppCompatActivity {
     private int frameWidth = 0;
     private int paddleHeight = 0;
     private int paddleWidth = 0;
+    private int ballHeight;
 
 
-    //Position
+    //Positions
     private float paddleLeftY, paddleRightY, paddleLeftX, paddleRightX;
     private float ballX, ballY;
 
-    //Speed paddles? do I need this???
+    //Speed paddles
     private int paddleLeftSpeed;
 
     //Ball Velocity and Speed
@@ -102,6 +103,11 @@ public class MainActivity extends AppCompatActivity {
         Speed = 20;
         newBall();
 
+        //initialize paddle speed
+        paddleLeftSpeed = 20;
+
+        //get ball height
+        ballHeight = ball.getHeight();
 
     }
 
@@ -199,12 +205,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void move() {
 
-        //moving ball up left
+        //moving ball
 
         ballX += (xVel * Speed);
         ballY += (yVel * Speed);
 
-        //point for right paddle user and restart the game
+        //point for right paddle user and restart the game --> collision with left wall
         if (ballX < 0 ){
             scoreRight++;
 
@@ -214,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
             newBall();
         }
 
-        //point for left paddle user and restart the game
+        //point for left paddle user and restart the game -->collision with right wall
         if  (ballX > frameWidth){
             scoreLeft++;
 
@@ -224,10 +230,29 @@ public class MainActivity extends AppCompatActivity {
             newBall();
         }
 
-        if (ballY < 0  || ballY > frameHeight - ball.getHeight()/2){
+        //Collision with upper and lower walls
+
+        if (ballY < 0  || ballY > frameHeight - ballHeight/2){
             changeYDir();
         }
 
+        //collision with paddle
+
+        //position of ball
+        float ballCenterX = ballX + ballHeight/2;
+        float ballCenterY = ballY + ballHeight/2;
+
+       //collision left paddle
+        if ( ballCenterX >= paddleLeftX && ballCenterX <= paddleWidth + paddleLeftX &&    // the ball is in the x  axis between the left wall and the paddle
+         ballCenterY >= paddleLeftY && ballCenterY <= paddleLeftY + paddleHeight) {      //in the y axis between the upper corner (paddleLeftY) and the lower corner paddleLeftY + size
+            changeXDir();
+        }
+
+        //collision right paddle
+        if ( ballCenterX >= paddleRightX && ballCenterX <= paddleWidth + paddleRightX &&    // the ball is in the x  axis between the left wall and the paddle
+                ballCenterY >= paddleRightY && ballCenterY <= paddleRightY + paddleHeight) {      //in the y axis between the upper corner (paddleLeftY) and the lower corner paddleLeftY + size
+            changeXDir();
+        }
 
 
         ball.setX(ballX);
@@ -242,10 +267,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (action_flag) {
             //touching  - moving down
-            paddleLeftY += 5;
+            paddleLeftY += paddleLeftSpeed;
         } else {
             //releasing - moving up
-            paddleLeftY -= 5;
+            paddleLeftY -= paddleLeftSpeed;
         }
 
         //check paddle position to set it within the limits
@@ -281,10 +306,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void newBall(){
         //start from the middle
-        ballX = (float)Math.floor(frameWidth/2 -ball.getHeight()/2);
+        ballX = (float)Math.floor(frameWidth/2 -ballHeight/2);
         //start randomly from the middle
-        ballY = (float)Math.floor(Math.random()*(frameHeight - ball.getHeight()));
+        ballY = (float)Math.floor(Math.random()*(frameHeight - ballHeight));
 
+        //Math.random() returns a number between 0 and 1, multiplied by 2, between 0 and 2, minus 1, between -1 and 1
         xVel = getSign(Math.random() * 2.0 - 1);
         yVel = getSign(Math.random() * 2.0 - 1);
 
