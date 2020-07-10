@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private int paddleLeftSpeed;
 
     //Ball Velocity and Speed
-    private int xVel = -1 , yVel = -1, xSpeed = 5, ySpeed = 5;
+    private int xVel = -1 , yVel = -1, Speed = 20;
 
     //Score
     private int scoreLeft = 0;
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             move();
 
-                            if (scoreLeft == 1 || scoreRight == 1){
+                            if (scoreLeft == 5 || scoreRight == 5){
                                 gameStop();
 
                             }
@@ -196,8 +196,8 @@ public class MainActivity extends AppCompatActivity {
 
         //moving ball up left
 
-        ballX += (xVel * xSpeed);
-        ballY += (yVel * ySpeed);
+        ballX += (xVel * Speed);
+        ballY += (yVel * Speed);
 
         //point for right paddle user and restart the game
         if (ballX < 0 ){
@@ -268,13 +268,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void newBall(){
         //start from the middle
-        ballX = (float)Math.floor(frameWidth/2);
+        ballX = (float)Math.floor(frameWidth/2 -ball.getHeight()/2);
         //start randomly from the middle
         ballY = (float)Math.floor(Math.random()*(frameHeight - ball.getHeight()));
+
+        xVel = getSign(Math.random() * 2.0 - 1);
+        yVel = getSign(Math.random() * 2.0 - 1);
+
+
 
         ball.setX(ballX);
         ball.setY(ballY);
 
+    }
+
+    private int getSign(double random) {
+        if (random <= 0) return -1;
+        return 1;
     }
 
 }
