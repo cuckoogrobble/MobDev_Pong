@@ -170,6 +170,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //ini random right paddle velocity
         yPaddleVel = getSign(Math.random() * 2.0 - 1);
 
+        //Setting accelerometer
+        Log.d(TAG, "ini: Initializing Sensor Services");
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //Permission to use the sensor
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //getting the accelerometer sensor
+
     }
 
     private void changePaddleVelocity() {
@@ -271,7 +276,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                             if (scoreLeft == 15 || scoreRight == 15){
                                 gameStop();
-
                             }
                         }
                     });
@@ -280,11 +284,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }, 0, gameSpeed);
 
 
-        //Setting accelerometer
 
-        Log.d(TAG, "startGame:  Initializing Sensor Services");
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //Permission to use the sensor
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //getting the accelerometer sensor
         sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         Log.d(TAG, "startGame: Registered accelerometer listener");
 
@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         hits1pl.setVisibility(View.INVISIBLE);
         hits2pl.setVisibility(View.INVISIBLE);
         net.setVisibility(View.INVISIBLE);
-        startButton.setVisibility(View.VISIBLE);
+        startButton.setVisibility(View.INVISIBLE);
         gameTitle.setVisibility(View.VISIBLE);
         authorTitle.setVisibility(View.VISIBLE);
         gameOverText.setVisibility(View.VISIBLE);
@@ -384,51 +384,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             hits2pl.setText(""+hits2);
         }
 
-
+        //update positions
         ball.setX(ballX);
         ball.setY(ballY);
         paddleRight.setY(paddleRightY);
-
-
-  //collision with left paddle
-
-
-
-        //moving paddle
-/*
-//Touch
-        if (action_flag) {
-            //touching  - moving down
-            paddleLeftY += paddleLeftSpeed;
-        } else {
-            //releasing - moving up
-            paddleLeftY -= paddleLeftSpeed;
-        }*/
-
-
-
-        //check paddle position to set it within the limits
-
-
-        //move paddle
-        //touch
-     //  paddleLeft.setY(paddleLeftY);
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
 
-        if (start_flag) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                action_flag = true;
-
-            } else if (event.getAction() == MotionEvent.ACTION_UP){
-                action_flag = false;
-            }
-        }
-        return super.onTouchEvent(event);
-
-    }
 
     private void changeXDir(){
         xBallVel *=-1;
