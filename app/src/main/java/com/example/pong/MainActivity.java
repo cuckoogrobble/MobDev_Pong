@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean start_flag = false;
     private boolean action_flag = false;
 
+    //Time count
+    private long startTime = 0;
+    private long currentTime = 0;
+
     //Sound
 
     //Start Button
@@ -113,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
         startButton = findViewById(R.id.startButton);
         gameOverText = findViewById(R.id.gameOverText);
 
+        //Initialize time
+        startTime = System.currentTimeMillis() / 1000;
+
         //initialize ball speed and velocity
         speed = 20;
         newBall();
@@ -126,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
         //game speed
         gameSpeed = 50;
+
 
         //ini random right paddle velocity
         yPaddleVel = getSign(Math.random() * 2.0 - 1);
@@ -265,6 +273,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void move() {
+
+        //getting timer to move
+        currentTime = System.currentTimeMillis()/1000;
+        timerText.setText("TIMER: "+(currentTime - startTime));
 
         //moving ball
 

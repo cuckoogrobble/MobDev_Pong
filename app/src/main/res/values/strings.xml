@@ -6,7 +6,7 @@
     <string name="hits1">0</string>
     <string name="hits2">0</string>
     <string name="hits">HITS</string>
-    <string name="timerText">TIMER:</string>
+    <string name="timerText">TIMER: 0</string>
     <string name="startButton">Start</string>
     <string name="gameOver">GAME OVER</string>
 </resources>
