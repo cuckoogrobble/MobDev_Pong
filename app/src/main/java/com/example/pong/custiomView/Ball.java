@@ -13,11 +13,6 @@ import androidx.annotation.Nullable;
 public class Ball extends View {
 
 
-
-    private static final int BALL_SIZE = 50;
-    private static final int X = 900;
-    private static final int Y = 500;
-
     public Ball(Context context) {
         super(context);
 

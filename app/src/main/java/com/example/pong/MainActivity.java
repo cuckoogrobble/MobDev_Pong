@@ -42,8 +42,11 @@ public class MainActivity extends AppCompatActivity {
     private float paddleLeftY, paddleRightY, paddleLeftX, paddleRightX;
     private float ballX, ballY;
 
-    //Speed
+    //Speed paddles? do I need this???
     private int paddleLeftSpeed;
+
+    //Ball Velocity and Speed
+    private int xVel = -1 , yVel = -1, xSpeed = 5, ySpeed = 5;
 
     //Score
     private int scoreLeft = 0;
@@ -165,8 +168,6 @@ public class MainActivity extends AppCompatActivity {
         }, 0, 100);
 
 
-        //Initialize score
-
 
     }
 
@@ -195,8 +196,8 @@ public class MainActivity extends AppCompatActivity {
 
         //moving ball up left
 
-        ballX -= 5;
-        ballY -= 5;
+        ballX += (xVel * xSpeed);
+        ballY += (yVel * ySpeed);
 
         //point for right paddle user and restart the game
         if (ballX < 0 ){
@@ -205,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
             //update right score
             scoreRightText.setText(""+scoreRight);
 
-            gameRestart();
+            newBall();
         }
 
         //point for left paddle user and restart the game
@@ -215,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
             //update left score
             scoreLeftText.setText(""+scoreLeft);
 
-            gameRestart();
+            newBall();
         }
 
 
@@ -265,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
         ballX += 12;
     }
 
-    private void gameRestart(){
+    private void newBall(){
         //start from the middle
         ballX = (float)Math.floor(frameWidth/2);
         //start randomly from the middle
