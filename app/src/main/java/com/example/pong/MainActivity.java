@@ -2,9 +2,14 @@ package com.example.pong;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +23,7 @@ import com.example.pong.custiomView.Paddle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
 
     //Game Layout
@@ -82,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
     private Button startButton;
 
 
+    //Sensor Manager
+    private SensorManager sensorManager;
+    Sensor accelerometer;
+
+    private static final String TAG = "MainActivity";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +113,23 @@ public class MainActivity extends AppCompatActivity {
         hits2pl.setVisibility(View.INVISIBLE);
         timerText.setVisibility(View.INVISIBLE);
         gameOverText.setVisibility(View.INVISIBLE);
+
+        Log.d(TAG, "onCreate: Initializing Sensor Services");
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //Permission to use the sensor
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //getting the accelerometer sensor
+        sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        Log.d(TAG, "onCreate: Registered accelerometer listener");
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        Log.d(TAG, "onSensorChanged: Y: "+ event.values[1]);
+
     }
 
     protected void ini() {
