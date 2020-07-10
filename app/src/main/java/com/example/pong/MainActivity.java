@@ -45,9 +45,16 @@ public class MainActivity extends AppCompatActivity {
 
     //Speed paddles
     private int paddleLeftSpeed;
+    private int paddleRightSpeed;
+
+    //Right Paddle Velocity (direction)
+    private int yPaddleVel;
 
     //Ball Velocity and Speed
-    private int xVel, yVel, Speed;
+    private int xBallVel, yBallVel, speed;
+
+    //Game Speed
+    private int gameSpeed;
 
     //Score
     private int scoreLeft = 0;
@@ -60,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
     //Status
     private boolean start_flag = false;
     private boolean action_flag = false;
-    private boolean up_flag = false;
 
     //Sound
 
@@ -100,18 +106,35 @@ public class MainActivity extends AppCompatActivity {
         gameOverText = findViewById(R.id.gameOverText);
 
         //initialize ball speed and velocity
-        Speed = 20;
+        speed = 20;
         newBall();
 
         //initialize paddle speed
         paddleLeftSpeed = 20;
+        paddleRightSpeed = 25;
 
         //get ball height
         ballHeight = ball.getHeight();
 
+        //game speed
+        gameSpeed = 50;
+
+        //ini random right paddle velocity
+        yPaddleVel = getSign(Math.random() * 2.0 - 1);
+
+    }
+
+    private void changePaddleVelocity() {
+        yPaddleVel *= -1;
     }
 
     public void startGame(View view) {
+
+        //I thought this would help with game speed, but apparently not
+        ini();
+        //This also doesnt help
+        gameSpeed = 50;
+        speed = 20; // also not
 
         //set score to 0
         resetScore();
@@ -126,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             paddleWidth = paddleLeft.getWidth();
         }
 
-        //initial positions         last - paddleHeight bc of my phone
+        //initial positions
         paddleLeftY = frameHeight / 2 - paddleHeight / 2;
         paddleRightY = frameHeight / 2 - paddleHeight / 2;
         paddleLeftX = paddleWidth;
@@ -143,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
         ball.setY(ballY);
         ball.setX(ballX);
+
 
         //Set visibility
         net.setVisibility(View.VISIBLE);
@@ -175,8 +199,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
-            } // call move() every 20 ms
-        }, 0, 100);
+            } // call move(),  every gameSpeed ms, now 50 ms.
+        }, 0, gameSpeed);
 
 
 
@@ -207,8 +231,15 @@ public class MainActivity extends AppCompatActivity {
 
         //moving ball
 
-        ballX += (xVel * Speed);
-        ballY += (yVel * Speed);
+        ballX += (xBallVel * speed);
+        ballY += (yBallVel * speed);
+
+        //moving right Paddle
+        paddleRightY += (yPaddleVel * paddleRightSpeed);
+
+        if ( paddleRightY < 0 ) changePaddleVelocity();
+        if ( paddleRightY + paddleHeight >= frameHeight) changePaddleVelocity();
+
 
         //point for right paddle user and restart the game --> collision with left wall
         if (ballX < 0 ){
@@ -257,9 +288,10 @@ public class MainActivity extends AppCompatActivity {
 
         ball.setX(ballX);
         ball.setY(ballY);
+        paddleRight.setY(paddleRightY);
 
 
-
+  //collision with left paddle
 
 
 
@@ -297,11 +329,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeXDir(){
-        xVel *=-1;
+        xBallVel *=-1;
     }
 
     private void changeYDir(){
-        yVel *=-1;
+        yBallVel *=-1;
     }
 
     private void newBall(){
@@ -311,8 +343,8 @@ public class MainActivity extends AppCompatActivity {
         ballY = (float)Math.floor(Math.random()*(frameHeight - ballHeight));
 
         //Math.random() returns a number between 0 and 1, multiplied by 2, between 0 and 2, minus 1, between -1 and 1
-        xVel = getSign(Math.random() * 2.0 - 1);
-        yVel = getSign(Math.random() * 2.0 - 1);
+        xBallVel = getSign(Math.random() * 2.0 - 1);
+        yBallVel = getSign(Math.random() * 2.0 - 1);
 
 
 
