@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/score1"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:textAlignment="center"
             android:gravity="center_horizontal" />
 
@@ -34,7 +34,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/score2"
-            android:textSize="18sp"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/hitsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hits"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/hits1pl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hits1"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/hits2pl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hits2"
+            android:textSize="12sp"
             android:textAlignment="center"
             android:gravity="center_horizontal" />
 

@@ -3,6 +3,9 @@
     <string name="author_name">By Josefa Castillo</string>
     <string name="score1">0</string>
     <string name="score2">0</string>
+    <string name="hits1">0</string>
+    <string name="hits2">0</string>
+    <string name="hits">HITS</string>
     <string name="startButton">Start</string>
     <string name="gameOver">GAME OVER</string>
 </resources>

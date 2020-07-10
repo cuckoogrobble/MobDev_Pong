@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     //Game Elements
     private Ball ball;
     private Paddle paddleLeft, paddleRight;
-    private TextView scoreLeftText, scoreRightText, gameTitle, authorTitle, gameOverText;
+    private TextView scoreLeftText, scoreRightText, gameTitle, authorTitle, gameOverText, hitsText, hits1pl,hits2pl;
     private View net;
 
     //Size
@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
     //Score
     private int scoreLeft = 0;
     private int scoreRight = 0;
+
+    //Hits
+    private int hits1 = 0;
+    private int hits2 = 0;
 
     //Timer
     private Timer timer;
@@ -100,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
         paddleRight = findViewById(R.id.paddleRight);
         scoreLeftText = findViewById(R.id.score1pl);
         scoreRightText = findViewById(R.id.score2pl);
+        hitsText = findViewById(R.id.hitsText);
+        hits1pl = findViewById(R.id.hits1pl);
+        hits2pl = findViewById(R.id.hits2pl);
         gameTitle = findViewById(R.id.gameTitle);
         authorTitle = findViewById(R.id.author);
         startButton = findViewById(R.id.startButton);
@@ -177,6 +184,18 @@ public class MainActivity extends AppCompatActivity {
         scoreRightText.setX(frameWidth/2 + frameWidth/4);
         scoreRightText.setY(scoreTextHeight/2);
 
+        //Hits
+        hitsText.setX(5);
+        hitsText.setY(frameHeight - hitsText.getHeight() - 5);
+
+        int hitsHeight = hits1pl.getHeight();
+
+        hits1pl.setX(frameWidth/2 - frameWidth/4);
+        hits1pl.setY(frameHeight - hitsHeight - hitsHeight/2);
+
+        hits2pl.setX(frameWidth/2 + frameWidth/4);
+        hits2pl.setY(frameHeight - hitsHeight - hitsHeight/2);
+
         //Set visibility
         net.setVisibility(View.VISIBLE);
         ball.setVisibility(View.VISIBLE);
@@ -187,6 +206,9 @@ public class MainActivity extends AppCompatActivity {
         paddleRight.setVisibility(View.VISIBLE);
         scoreRightText.setVisibility(View.VISIBLE);
         scoreLeftText.setVisibility(View.VISIBLE);
+        hitsText.setVisibility(View.VISIBLE);
+        hits1pl.setVisibility(View.VISIBLE);
+        hits2pl.setVisibility(View.VISIBLE);
         gameOverText.setVisibility(View.INVISIBLE);
 
         //Set Timer
@@ -286,12 +308,16 @@ public class MainActivity extends AppCompatActivity {
         if ( ballCenterX >= paddleLeftX && ballCenterX <= paddleWidth + paddleLeftX &&    // the ball is in the x  axis between the left wall and the paddle
          ballCenterY >= paddleLeftY && ballCenterY <= paddleLeftY + paddleHeight) {      //in the y axis between the upper corner (paddleLeftY) and the lower corner paddleLeftY + size
             changeXDir();
+            hits1++;
+            hits1pl.setText(""+hits1);
         }
 
         //collision right paddle
         if ( ballCenterX >= paddleRightX && ballCenterX <= paddleWidth + paddleRightX &&    // the ball is in the x  axis between the left wall and the paddle
                 ballCenterY >= paddleRightY && ballCenterY <= paddleRightY + paddleHeight) {      //in the y axis between the upper corner (paddleLeftY) and the lower corner paddleLeftY + size
             changeXDir();
+            hits2++;
+            hits2pl.setText(""+hits2);
         }
 
 
