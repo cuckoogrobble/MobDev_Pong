@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
         paddleLeft.setVisibility(View.INVISIBLE);
         scoreRightText.setVisibility(View.INVISIBLE);
         scoreLeftText.setVisibility(View.INVISIBLE);
+        hitsText.setVisibility(View.INVISIBLE);
+        hits1pl.setVisibility(View.INVISIBLE);
+        hits2pl.setVisibility(View.INVISIBLE);
+        timerText.setVisibility(View.INVISIBLE);
         gameOverText.setVisibility(View.INVISIBLE);
     }
 
@@ -264,6 +268,12 @@ public class MainActivity extends AppCompatActivity {
         ball.setVisibility(View.INVISIBLE);
         paddleLeft.setVisibility(View.INVISIBLE);
         paddleRight.setVisibility(View.INVISIBLE);
+        scoreLeftText.setVisibility(View.INVISIBLE);
+        scoreRightText.setVisibility(View.INVISIBLE);
+        timerText.setVisibility(View.INVISIBLE);
+        hitsText.setVisibility(View.INVISIBLE);
+        hits1pl.setVisibility(View.INVISIBLE);
+        hits2pl.setVisibility(View.INVISIBLE);
         net.setVisibility(View.INVISIBLE);
         startButton.setVisibility(View.VISIBLE);
         gameTitle.setVisibility(View.VISIBLE);
