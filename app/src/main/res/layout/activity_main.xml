@@ -183,77 +183,107 @@
 
             <TableLayout
                 android:id="@+id/statsTable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="500dp"
+                android:layout_height="match_parent"
+                android:padding="-50dp">
 
 
-                <TableRow>
+                <TableRow
+                    android:layout_margin="5dp">
+
                     <TextView
                         android:id="@+id/empty"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="start"
+                        android:layout_weight="1"/>
                     <TextView
                         android:id="@+id/titlePlayer1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/titlePlayer1"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/titlePlayer1"
+                        android:gravity="center"
+                        android:layout_weight="2"/>
                     <TextView
                         android:id="@+id/titlePlayer2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/titlePlayer2"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/titlePlayer2"
+                        android:gravity="center"
+                        android:layout_weight="3"/>
 
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:layout_margin="5dp">
                     <TextView
                         android:id="@+id/scoresTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/scoresTitle"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/scoresTitle"
+                        android:gravity="start"
+                        android:layout_weight="1"/>
                     <TextView
                         android:id="@+id/scorePlayer1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="@string/score1"/>
+                        android:text="@string/score1"
+                        android:layout_weight="2"/>
                     <TextView
                         android:id="@+id/scorePlayer2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/score2"
                         android:gravity="center"
-                        android:text="@string/score2"/>
+                        android:layout_weight="3"/>
 
                 </TableRow>
                 <TableRow>
                     <TextView
                         android:id="@+id/hitsTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hitsTitle"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/hitsTitle"
+                        android:gravity="start"
+                        android:layout_weight="1"/>
                     <TextView
                         android:id="@+id/hitsPlayer1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/hits1"
                         android:gravity="center"
-                        android:text="@string/hits1"/>
+                        android:layout_weight="2"/>
                     <TextView
                         android:id="@+id/hitsPlayer2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/hits2"
                         android:gravity="center"
-                        android:text="@string/hits2"/>
+                        android:layout_weight="3"/>
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:layout_margin="5dp">
                     <TextView
                         android:id="@+id/timerTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/timerTitle"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/timerTitle"
+                        android:gravity="start"
+                        android:layout_weight="1"/>
                     <TextView
                         android:id="@+id/timerNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/timerText"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/timerText"
+                        android:gravity="end"
+                        android:layout_weight="2"/>
+                    <TextView
+                        android:id="@+id/filling"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:gravity="center"
+                        android:layout_weight="3"/>
 
                 </TableRow>
             </TableLayout>
