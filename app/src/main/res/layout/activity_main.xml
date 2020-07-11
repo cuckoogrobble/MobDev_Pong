@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <FrameLayout
         android:id="@+id/gameFrame"
@@ -16,149 +16,233 @@
             android:id="@+id/score1pl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="@string/score1"
-            android:textSize="25sp"
             android:textAlignment="center"
-            android:gravity="center_horizontal" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/score2pl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="@string/score2"
-            android:textSize="25sp"
             android:textAlignment="center"
-            android:gravity="center_horizontal" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/hitsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="@string/hits"
-            android:textSize="12sp"
             android:textAlignment="center"
-            android:gravity="center_horizontal" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/hits1pl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="@string/hits1"
-            android:textSize="12sp"
             android:textAlignment="center"
-            android:gravity="center_horizontal" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/hits2pl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="@string/hits2"
-            android:textSize="12sp"
             android:textAlignment="center"
-            android:gravity="center_horizontal" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/timerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="@string/timerText"
-            android:textSize="12sp"
             android:textAlignment="center"
-            android:gravity="center_horizontal" />
+            android:textSize="12sp" />
 
 
         <ImageView
             android:id="@+id/ball"
-            android:contentDescription="@string/ball"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/ball" />
 
         <ImageView
             android:id="@+id/paddleRight"
-            android:contentDescription="@string/right_paddle"
             android:layout_width="10dp"
             android:layout_height="50dp"
-            android:background="@color/colorAccent"/>
+            android:background="@color/colorAccent"
+            android:contentDescription="@string/right_paddle" />
 
         <ImageView
             android:id="@+id/paddleLeft"
-            android:contentDescription="@string/left_paddle"
             android:layout_width="10dp"
             android:layout_height="50dp"
-            android:background="@color/colorOrange"/>
+            android:background="@color/colorOrange"
+            android:contentDescription="@string/left_paddle" />
 
 
         <ImageView
             android:id="@+id/net"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/dotted"
+            android:contentDescription="@string/net"
             android:layerType="software"
-            android:contentDescription="@string/net"/>
+            android:src="@drawable/dotted" />
 
         <LinearLayout
             android:id="@+id/startLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/gameTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="@string/app_name"
-                android:textSize="35sp"
-                android:layout_marginTop="20dp" />
+                android:textSize="35sp" />
 
             <TextView
                 android:id="@+id/author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
                 android:text="@string/author_name"
                 android:textSize="14sp"
-                android:textStyle="italic"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"/>
-
-            <TextView
-                android:id="@+id/gameOverText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gameOver"
-                android:textSize="42sp"
-                android:layout_marginTop="10dp"/>
+                android:textStyle="italic" />
 
 
             <Button
                 android:id="@+id/startButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/startButton"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="10dp"
-                android:onClick="startGame"/>
+                android:onClick="startGame"
+                android:text="@string/startButton" />
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/date"
-                android:textSize="12sp"
                 android:layout_gravity="end"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
                 android:gravity="bottom"
-                android:layout_marginRight="2dp"/>
+                android:text="@string/date"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/credits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/credits"
-                android:textSize="12sp"
                 android:layout_gravity="end"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
                 android:gravity="bottom"
-                android:layout_marginRight="2dp"/>
+                android:text="@string/credits"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/endLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/gameOverText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/gameOver"
+                android:textSize="42sp" />
+
+            <TableLayout
+                android:id="@+id/statsTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/empty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/titlePlayer1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/titlePlayer1"/>
+                    <TextView
+                        android:id="@+id/titlePlayer2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/titlePlayer2"/>
+
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/scoresTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/scoresTitle"/>
+                    <TextView
+                        android:id="@+id/scorePlayer1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/score1"/>
+                    <TextView
+                        android:id="@+id/scorePlayer2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/score2"/>
+
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/hitsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hitsTitle"/>
+                    <TextView
+                        android:id="@+id/hitsPlayer1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/hits1"/>
+                    <TextView
+                        android:id="@+id/hitsPlayer2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/hits2"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/timerTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/timerText"/>
+
+                </TableRow>
+            </TableLayout>
 
         </LinearLayout>
     </FrameLayout>

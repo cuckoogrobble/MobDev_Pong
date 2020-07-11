@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -25,11 +27,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     //Game Layout
     private FrameLayout gameFrame;
-    private LinearLayout startLayout;
+    private LinearLayout startLayout, endLayout;
+    private TableLayout statsTable;
 
     //Game Elements
     private TextView scoreLeftText, scoreRightText, gameTitle, authorTitle, gameOverText, hitsText, hits1pl,hits2pl, timerText;
-    private TextView credits, date;
+    private TextView credits, date, statScore1, statScore2, statHits1, statHits2, statsTimer;
     private ImageView net, paddleLeft, paddleRight, ball;
 
     //Size
@@ -109,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         hits2pl.setVisibility(View.INVISIBLE);
         timerText.setVisibility(View.INVISIBLE);
         gameOverText.setVisibility(View.INVISIBLE);
+        endLayout.setVisibility(View.INVISIBLE);
+
 
     }
 
@@ -146,10 +151,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         gameOverText = findViewById(R.id.gameOverText);
         date = findViewById(R.id.date);
         credits = findViewById(R.id.credits);
+        statsTable = findViewById(R.id.statsTable);
+        statScore1 = findViewById(R.id.scorePlayer1);
+        statScore2 = findViewById(R.id.scorePlayer2);
+        statHits1 = findViewById(R.id.hitsPlayer1);
+        statHits2 = findViewById(R.id.hitsPlayer2);
+        statsTimer = findViewById(R.id.timerTitle);
+        endLayout = findViewById(R.id.endLayout);
 
 
-        //Initialize time
-        startTime = System.currentTimeMillis() / 1000;
+
 
         //initialize ball speed and velocity
         speed = 5;
@@ -187,6 +198,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //This also doesnt help
        // gameSpeed = 50;
        // speed = 20; // also not
+
+        //Initialize time
+        startTime = System.currentTimeMillis() / 1000;
 
         //set score to 0
         resetScore();
@@ -260,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         hits2pl.setVisibility(View.VISIBLE);
         timerText.setVisibility(View.VISIBLE);
         gameOverText.setVisibility(View.INVISIBLE);
+        date.setVisibility(View.INVISIBLE);
         credits.setVisibility(View.INVISIBLE);
 
         //Set Timer
@@ -274,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         public void run() {
                             move();
 
-                            if (scoreLeft == 15 || scoreRight == 15){
+                            if (scoreLeft == 1 || scoreRight == 1){
                                 gameStop();
                             }
                         }
@@ -312,11 +327,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         hits2pl.setVisibility(View.INVISIBLE);
         net.setVisibility(View.INVISIBLE);
         startButton.setVisibility(View.INVISIBLE);
-        gameTitle.setVisibility(View.VISIBLE);
-        authorTitle.setVisibility(View.INVISIBLE);
+        authorTitle.setVisibility(View.GONE);
         gameOverText.setVisibility(View.VISIBLE);
         date.setVisibility(View.INVISIBLE);
         credits.setVisibility(View.INVISIBLE);
+        statsTable.setVisibility(View.VISIBLE);
+        endLayout.setVisibility(View.VISIBLE);
+
+        statScore1.setText(""+scoreLeft);
+        statScore2.setText(""+scoreRight);
+        statHits1.setText(""+hits1);
+        statHits2.setText(""+hits2);
+        statsTimer.setText("TIMER: "+(currentTime - startTime));
 
 
     }
@@ -325,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //getting timer to move
         currentTime = System.currentTimeMillis()/1000;
-        timerText.setText("TIMER: "+(currentTime - startTime));
+        timerText.setText("Timer: "+(currentTime - startTime)+" seconds");
 
         //moving ball
 
