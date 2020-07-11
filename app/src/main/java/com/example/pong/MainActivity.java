@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         statScore2 = findViewById(R.id.scorePlayer2);
         statHits1 = findViewById(R.id.hitsPlayer1);
         statHits2 = findViewById(R.id.hitsPlayer2);
-        statsTimer = findViewById(R.id.timerTitle);
+        statsTimer = findViewById(R.id.timerNumber);
         endLayout = findViewById(R.id.endLayout);
 
 
@@ -338,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         statScore2.setText(""+scoreRight);
         statHits1.setText(""+hits1);
         statHits2.setText(""+hits2);
-        statsTimer.setText("TIMER: "+(currentTime - startTime));
+        statsTimer.setText(""+(currentTime - startTime) + " seconds");
 
 
     }
@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //getting timer to move
         currentTime = System.currentTimeMillis()/1000;
-        timerText.setText("Timer: "+(currentTime - startTime)+" seconds");
+        timerText.setText("TIMER: "+(currentTime - startTime));
 
         //moving ball
 
