@@ -20,5 +20,5 @@
     <string name="titlePlayer2">Player 2</string>
     <string name="scoresTitle">Score: </string>
     <string name="hitsTitle">Hits: </string>
-    <string name="timerTitle">Timer: </string>
+    <string name="timerTitle">Time: </string>
 </resources>
