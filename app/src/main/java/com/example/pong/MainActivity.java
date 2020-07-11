@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     //Game Elements
     private TextView scoreLeftText, scoreRightText, gameTitle, authorTitle, gameOverText, hitsText, hits1pl,hits2pl, timerText;
+    private TextView credits, date;
     private ImageView net, paddleLeft, paddleRight, ball;
 
     //Size
@@ -143,6 +144,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         authorTitle = findViewById(R.id.author);
         startButton = findViewById(R.id.startButton);
         gameOverText = findViewById(R.id.gameOverText);
+        date = findViewById(R.id.date);
+        credits = findViewById(R.id.credits);
+
 
         //Initialize time
         startTime = System.currentTimeMillis() / 1000;
@@ -256,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         hits2pl.setVisibility(View.VISIBLE);
         timerText.setVisibility(View.VISIBLE);
         gameOverText.setVisibility(View.INVISIBLE);
+        credits.setVisibility(View.INVISIBLE);
 
         //Set Timer
 
@@ -308,8 +313,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         net.setVisibility(View.INVISIBLE);
         startButton.setVisibility(View.INVISIBLE);
         gameTitle.setVisibility(View.VISIBLE);
-        authorTitle.setVisibility(View.VISIBLE);
+        authorTitle.setVisibility(View.INVISIBLE);
         gameOverText.setVisibility(View.VISIBLE);
+        date.setVisibility(View.INVISIBLE);
+        credits.setVisibility(View.INVISIBLE);
+
 
     }
 

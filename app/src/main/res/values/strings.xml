@@ -13,4 +13,6 @@
     <string name="right_paddle"></string>
     <string name="ball"></string>
     <string name="net"></string>
+    <string name="credits">Project for \'Mobile Devices SS20\' Frankfurt University of Applied Sciences </string>
+    <string name="date">Developed: 10th July 2020</string>
 </resources>
