@@ -17,7 +17,7 @@
     <string name="date">Developed: 10th July 2020</string>
     <string name="titlePlayer1">Player 1</string>
     <string name="titlePlayer2">Player 2</string>
-    <string name="scoresTitle">Scores: </string>
+    <string name="scoresTitle">Score: </string>
     <string name="hitsTitle">Hits: </string>
     <string name="timerTitle">Timer: </string>
 </resources>
