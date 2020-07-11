@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     //Game Elements
     private TextView scoreLeftText, scoreRightText, gameTitle, authorTitle, gameOverText, hitsText, hits1pl,hits2pl, timerText;
-    private TextView credits, date, statScore1, statScore2, statHits1, statHits2, statsTimer;
+    private TextView credits, date, statScore1, statScore2, statHits1, statHits2, statsTimer, whoWon;
     private ImageView net, paddleLeft, paddleRight, ball;
 
     //Size
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         statHits2 = findViewById(R.id.hitsPlayer2);
         statsTimer = findViewById(R.id.timerNumber);
         endLayout = findViewById(R.id.endLayout);
-
+        whoWon = findViewById(R.id.whoWon);
 
 
 
@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         public void run() {
                             move();
 
-                            if (scoreLeft == 5 || scoreRight == 5){
+                            if (scoreLeft == 1 || scoreRight == 1){
                                 gameStop();
                             }
                         }
@@ -339,6 +339,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         statHits1.setText(""+hits1);
         statHits2.setText(""+hits2);
         statsTimer.setText(""+(currentTime - startTime) + " seconds");
+
+       whoWon.setText("YOU "+ ((scoreLeft>scoreRight) ? "WON!" : "LOST :-("));
 
 
     }

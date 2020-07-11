@@ -9,6 +9,7 @@
     <string name="timerText">TIMER: </string>
     <string name="startButton">Start</string>
     <string name="gameOver">GAME OVER</string>
+    <string name="whoWon">You </string>
     <string name="left_paddle"></string>
     <string name="right_paddle"></string>
     <string name="ball"></string>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -172,6 +172,15 @@
                 android:text="@string/gameOver"
                 android:textSize="42sp" />
 
+            <TextView
+                android:id="@+id/whoWon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/whoWon"
+                android:textSize="25sp"/>
+
             <TableLayout
                 android:id="@+id/statsTable"
                 android:layout_width="wrap_content"
@@ -251,7 +260,7 @@
 
         </LinearLayout>
     </FrameLayout>
-</LinearLayout>
+</RelativeLayout>
 
 
 
