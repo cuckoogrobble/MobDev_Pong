@@ -10,15 +10,12 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.example.pong.custiomView.Ball;
-import com.example.pong.custiomView.Paddle;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,10 +28,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private LinearLayout startLayout;
 
     //Game Elements
-    private Ball ball;
-    private Paddle paddleLeft, paddleRight;
     private TextView scoreLeftText, scoreRightText, gameTitle, authorTitle, gameOverText, hitsText, hits1pl,hits2pl, timerText;
-    private View net;
+    private ImageView net, paddleLeft, paddleRight, ball;
 
     //Size
     private int frameHeight = 0;

@@ -7,14 +7,6 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-
-
-   <!-- <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp">-->
-
-   <!-- </LinearLayout>-->
     <FrameLayout
         android:id="@+id/gameFrame"
         android:layout_width="match_parent"
@@ -75,35 +67,36 @@
             android:gravity="center_horizontal" />
 
 
-        <com.example.pong.custiomView.Ball
+        <ImageView
             android:id="@+id/ball"
+            android:contentDescription="@string/ball"
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:background="@color/colorPrimary"/>
 
-        <com.example.pong.custiomView.Paddle
+        <ImageView
             android:id="@+id/paddleRight"
+            android:contentDescription="@string/right_paddle"
             android:layout_width="10dp"
             android:layout_height="50dp"
             android:background="@color/colorAccent"/>
 
-        <com.example.pong.custiomView.Paddle
+        <ImageView
             android:id="@+id/paddleLeft"
+            android:contentDescription="@string/left_paddle"
             android:layout_width="10dp"
             android:layout_height="50dp"
             android:background="@color/colorOrange"/>
 
-        <View
+
+        <ImageView
             android:id="@+id/net"
-            android:layout_width="2dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@color/colorBlack"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
-        </View>
+            android:src="@drawable/dotted"
+            android:layerType="software"
+            android:contentDescription="@string/net"/>
+
 
         <LinearLayout
             android:id="@+id/startLayout"
@@ -134,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/gameOver"
-                android:textSize="42dp"
+                android:textSize="42sp"
                 android:layout_marginTop="10dp"/>
 
 
@@ -145,9 +138,6 @@
                 android:text="@string/startButton"
                 android:layout_marginTop="50dp"
                 android:onClick="startGame"/>
-
-
-
 
         </LinearLayout>
     </FrameLayout>

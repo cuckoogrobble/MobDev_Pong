@@ -9,4 +9,8 @@
     <string name="timerText">TIMER: 0</string>
     <string name="startButton">Start</string>
     <string name="gameOver">GAME OVER</string>
+    <string name="left_paddle"></string>
+    <string name="right_paddle"></string>
+    <string name="ball"></string>
+    <string name="net"></string>
 </resources>
