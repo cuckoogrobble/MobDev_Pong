@@ -186,12 +186,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //Permission to use the sensor
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //getting the accelerometer sensor
 
-        //Trying to get them to the bottom :/ not working
-        date.setX(frameWidth - date.getWidth());
-        date.setY(frameHeight - date.getHeight() - credits.getHeight());
-        credits.setX(frameWidth - credits.getWidth());
-        credits.setY(frameHeight - credits.getHeight());
-
     }
 
     private void changePaddleVelocity() {
