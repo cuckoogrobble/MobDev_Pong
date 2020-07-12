@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         public void run() {
                             move();
 
-                            if (scoreLeft == 10 || scoreRight == 10){
+                            if (scoreLeft == 1 || scoreRight == 1){
                                 gameStop();
                             }
                         }
