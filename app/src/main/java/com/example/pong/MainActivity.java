@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         timerText.setVisibility(View.INVISIBLE);
         gameOverText.setVisibility(View.INVISIBLE);
         endLayout.setVisibility(View.INVISIBLE);
+        startLayout.setVisibility(View.VISIBLE); //trying to get the date and credits to bottom
 
 
     }
@@ -184,6 +185,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Log.d(TAG, "ini: Initializing Sensor Services");
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //Permission to use the sensor
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //getting the accelerometer sensor
+
+        //Trying to get them to the bottom :/ not working
+        date.setX(frameWidth - date.getWidth());
+        date.setY(frameHeight - date.getHeight() - credits.getHeight());
+        credits.setX(frameWidth - credits.getWidth());
+        credits.setY(frameHeight - credits.getHeight());
 
     }
 

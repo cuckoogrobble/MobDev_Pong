@@ -19,7 +19,7 @@
             android:gravity="center_horizontal"
             android:text="@string/score1"
             android:textAlignment="center"
-            android:textSize="25sp" />
+            android:textSize="35sp" />
 
         <TextView
             android:id="@+id/score2pl"
@@ -28,7 +28,7 @@
             android:gravity="center_horizontal"
             android:text="@string/score2"
             android:textAlignment="center"
-            android:textSize="25sp" />
+            android:textSize="35sp" />
 
         <TextView
             android:id="@+id/hitsText"
@@ -62,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:text="@string/timerText"
             android:textAlignment="center"
             android:textSize="12sp" />
@@ -137,10 +138,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="40dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
-                android:gravity="bottom"
                 android:text="@string/date"
                 android:textSize="12sp" />
 
@@ -151,7 +150,6 @@
                 android:layout_gravity="end"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
-                android:gravity="bottom"
                 android:text="@string/credits"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -238,7 +236,8 @@
                         android:layout_weight="3"/>
 
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:layout_margin="5dp">
                     <TextView
                         android:id="@+id/hitsTitle"
                         android:layout_width="match_parent"
@@ -279,10 +278,10 @@
                         android:layout_weight="2"/>
                     <TextView
                         android:id="@+id/filling"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text=""
-                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:text="."
                         android:layout_weight="3"/>
 
                 </TableRow>
