@@ -169,20 +169,57 @@
             android:textSize="14sp"
             android:textStyle="italic" />
 
-
-        <Button
-            android:id="@+id/startButton"
+        <TableLayout
+            android:id="@+id/settings"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="10dp"
-            android:onClick="startGame"
-            android:text="@string/startButton" />
+            android:layout_height="wrap_content">
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/ballSpeedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ballSpeedText"/>
+
+                <ToggleButton
+                    android:id="@+id/ballSpeed"
+                    android:textOff="@string/ballSpeedDefault"
+                    android:textOn="@string/BallSpeedFast"/>
+
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/paddlesLengthText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/paddleLengthText"/>
+
+                <ToggleButton
+                    android:id="@+id/paddlesLength"
+                    android:textOff="@string/paddleLengthDefault"
+                    android:textOn="@string/paddleLengthLonger"/>
+
+            </TableRow>
+        </TableLayout>
+
+
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:onClick="startGame"
+            android:text="@string/startButton"
+            app:layout_constraintBottom_toBottomOf="@+id/date"
+            app:layout_constraintEnd_toEndOf="@+id/date"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/date"

@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Pong</string>
     <string name="author_name">By Josefa Castillo</string>
+    <string name="ballSpeedText">Ball Speed: </string>
+    <string name="ballSpeedDefault">Default</string>
+    <string name="BallSpeedFast">Fast</string>
+    <string name="paddleLengthText">Paddle Length: </string>
+    <string name="paddleLengthDefault">Default </string>
+    <string name="paddleLengthLonger">Longer</string>
     <string name="score1">0</string>
     <string name="score2">0</string>
     <string name="hits1">0</string>

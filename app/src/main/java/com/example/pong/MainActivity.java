@@ -2,6 +2,7 @@ package com.example.pong;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -12,12 +13,13 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,12 +30,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     //Game Layout
     private FrameLayout gameFrame;
     private LinearLayout startLayout, endLayout;
-    private TableLayout statsTable;
+    private TableLayout statsTable, settings;
 
     //Game Elements
     private TextView scoreLeftText, scoreRightText, gameTitle, authorTitle, gameOverText, hitsText, hits1pl,hits2pl, timerText;
     private TextView credits, date, statScore1, statScore2, statHits1, statHits2, statsTimer, whoWon;
     private ImageView net, paddleLeft, paddleRight, ball;
+
+    //User values
+    ToggleButton speedAsignation, paddleLengthAsignation;
 
     //Size
     private int frameHeight = 0;
@@ -56,9 +61,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     //Ball Velocity and Speed
     private int xBallVel, yBallVel, speed;
+    //default
+    private static final int BALL_SPEED = 5;
+    //user defined ball speed
+    private  int userSpeed = 5;
 
     //Game Speed
-    private int gameSpeed;
+    private static final int GAME_SPEED = 30;
 
     //Score
     private int scoreLeft = 0;
@@ -160,22 +169,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         statsTimer = findViewById(R.id.timerNumber);
         endLayout = findViewById(R.id.endLayout);
         whoWon = findViewById(R.id.whoWon);
+        settings = findViewById(R.id.settings);
+        speedAsignation = findViewById(R.id.ballSpeed);
+        paddleLengthAsignation = findViewById(R.id.paddlesLength);
 
+        // getting frameHeight and frameWidth
+        if (frameHeight == 0) {
+            frameHeight = gameFrame.getHeight();
+            frameWidth = gameFrame.getWidth();
+            paddleHeight = paddleLeft.getHeight();
+            paddleWidth = paddleLeft.getWidth();
+        }
 
-
-        //initialize ball speed and velocity
-        speed = 5;
-        newBall();
-
-        //initialize paddle speed
-        paddleLeftSpeed = 15;
-        paddleRightSpeed = 10;
 
         //get ball height
         ballHeight = ball.getHeight();
-
-        //game speed
-        gameSpeed = 30;
 
 
         //ini random right paddle velocity
@@ -185,6 +193,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Log.d(TAG, "ini: Initializing Sensor Services");
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //Permission to use the sensor
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //getting the accelerometer sensor
+
+        //toggles
+        speedAsignation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) userSpeed = 10;
+                else userSpeed = BALL_SPEED;
+
+            }
+        });
+
+        Log.d(TAG, "ini: userSpeed: "+userSpeed);
+
+        paddleLengthAsignation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) paddleLeft.setMinimumHeight(2*paddleHeight);
+                else paddleLeft.setMaxHeight(paddleHeight);
+            }
+        });
+
+        Log.d(TAG, "ini: paddleLeftHeight: "+paddleLeft.getHeight());
+
 
     }
 
@@ -199,6 +228,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //This also doesnt help
        // gameSpeed = 50;
        // speed = 20; // also not
+
+        //initialize ball speed and velocity
+        speed = userSpeed;
+        Log.d(TAG, "startGame: BALL SPEED: " + speed);
+
+        newBall();
+
+        //initialize paddle speed
+        paddleLeftSpeed = 15;
+        paddleRightSpeed = 10;
 
         //Initialize time
         startTime = System.currentTimeMillis() / 1000;
@@ -216,10 +255,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             paddleWidth = paddleLeft.getWidth();
         }
 
+
         //initial positions
         //paddles
-        paddleLeftY = frameHeight / 2 - paddleHeight / 2;
-        paddleRightY = frameHeight / 2 - paddleHeight / 2;
+        paddleLeftY = frameHeight / (float)2 - paddleHeight / (float)2;
+        paddleRightY = frameHeight / (float)2 - paddleHeight / (float)2;
         paddleLeftX = paddleWidth;
         paddleRightX = frameWidth - 2 * paddleWidth;
 
@@ -229,8 +269,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         paddleRight.setY(paddleRightY);
 
         //Ball
-        ballX = frameWidth / 2;
-        ballY = frameHeight / 2;
+        ballX = frameWidth / 2f;
+        ballY = frameHeight / 2f;
 
         ball.setY(ballY);
         ball.setX(ballX);
@@ -238,11 +278,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //Scores
         int scoreTextHeight = scoreLeftText.getHeight();
 
-        scoreLeftText.setX(frameWidth/2 - frameWidth/4);
-        scoreLeftText.setY(scoreTextHeight/2);
+        scoreLeftText.setX(frameWidth/(float)2 - frameWidth/(float)4);
+        scoreLeftText.setY(scoreTextHeight/(float)2);
 
-        scoreRightText.setX(frameWidth/2 + frameWidth/4);
-        scoreRightText.setY(scoreTextHeight/2);
+        scoreRightText.setX(frameWidth/(float)2 + frameWidth/(float)4);
+        scoreRightText.setY(scoreTextHeight/(float)2);
 
         //Hits
         hitsText.setX(5);
@@ -250,11 +290,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         int hitsHeight = hits1pl.getHeight();
 
-        hits1pl.setX(frameWidth/2 - frameWidth/4);
-        hits1pl.setY(frameHeight - hitsHeight - hitsHeight/2);
+        hits1pl.setX(frameWidth/2f - frameWidth/4f);
+        hits1pl.setY(frameHeight - hitsHeight - hitsHeight/2f);
 
-        hits2pl.setX(frameWidth/2 + frameWidth/4);
-        hits2pl.setY(frameHeight - hitsHeight - hitsHeight/2);
+        hits2pl.setX(frameWidth/2f + frameWidth/4f);
+        hits2pl.setY(frameHeight - hitsHeight - hitsHeight/2f);
 
         //TIMER
         timerText.setX(frameWidth - 2 * (timerText.getWidth()));
@@ -277,6 +317,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         gameOverText.setVisibility(View.INVISIBLE);
         date.setVisibility(View.INVISIBLE);
         credits.setVisibility(View.INVISIBLE);
+        settings.setVisibility(View.INVISIBLE);
 
         //Set Timer
 
@@ -290,14 +331,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         public void run() {
                             move();
 
-                            if (scoreLeft == 1 || scoreRight == 1){
+                            if (scoreLeft == 10 || scoreRight == 10){
                                 gameStop();
                             }
                         }
                     });
                 }
             } // call move(),  every gameSpeed ms, now 50 ms.
-        }, 0, gameSpeed);
+        }, 0, GAME_SPEED);
 
 
 
@@ -313,6 +354,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         scoreRightText.setText(""+scoreRight);
     }
 
+    @SuppressLint("SetTextI18n")
     public void gameStop() {
 
         start_flag = false;
@@ -333,7 +375,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         date.setVisibility(View.INVISIBLE);
         credits.setVisibility(View.INVISIBLE);
         statsTable.setVisibility(View.VISIBLE);
+        startLayout.setVisibility(View.INVISIBLE);
         endLayout.setVisibility(View.VISIBLE);
+        settings.setVisibility(View.INVISIBLE);
+
 
         statScore1.setText(""+scoreLeft);
         statScore2.setText(""+scoreRight);
@@ -342,7 +387,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         statsTimer.setText(""+(currentTime - startTime) + " seconds");
 
        whoWon.setText("YOU "+ ((scoreLeft>scoreRight) ? "WON!" : "LOST :-("));
-
 
     }
 
@@ -417,8 +461,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         ball.setY(ballY);
         paddleRight.setY(paddleRightY);
     }
-
-
 
     private void changeXDir(){
         xBallVel *=-1;
