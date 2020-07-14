@@ -419,7 +419,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
         //point for right paddle user and restart the game --> collision with left wall
-        if (ballX < 0 ){
+        if (ballX < 0 ||  ballX < paddleLeftX){
             scoreRight++;
 
             //update right score
@@ -429,7 +429,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         //point for left paddle user and restart the game -->collision with right wall
-        if  (ballX > frameWidth){
+        if  (ballX >= frameWidth || ballX > (paddleRightX + paddleWidth)){
             scoreLeft++;
 
             //update left score
@@ -446,12 +446,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //collision with paddle
 
-        //position of ball
+        //position of center of ball
         float ballCenterX = ballX + ballHeight/2f;
         float ballCenterY = ballY + ballHeight/2f;
 
        //collision left paddle
-        if ( ballCenterX >= paddleLeftX && ballCenterX <= paddleWidth + paddleLeftX &&    // the ball is in the x  axis between the left wall and the paddle
+        if ( ballCenterX >= paddleLeftX && ballCenterX <= paddleLeftX + paddleWidth &&    // the ball is in the x  axis between the left wall and the paddle
          ballCenterY >= paddleLeftY && ballCenterY <= paddleLeftY + userPaddleHeight) {      //in the y axis between the upper corner (paddleLeftY) and the lower corner paddleLeftY + size
             changeXDir();
             hits1++;
@@ -459,7 +459,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         //collision right paddle
-        if ( ballCenterX >= paddleRightX && ballCenterX <= paddleWidth + paddleRightX &&    // the ball is in the x  axis between the left wall and the paddle
+
+        if ( (ballCenterX + ballHeight/4f) >= paddleRightX && (ballCenterX + ballHeight/4f) <= frameWidth &&    // the ball is in the x  axis between the left wall and the paddle
                 ballCenterY >= paddleRightY && ballCenterY <= paddleRightY + paddleHeight) {
             Log.d(TAG, "move: paddleHeight: "+paddleHeight);//in the y axis between the upper corner (paddleLeftY) and the lower corner paddleLeftY + size
             changeXDir();
