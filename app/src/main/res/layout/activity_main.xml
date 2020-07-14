@@ -173,7 +173,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/app_name"
             android:textColor="@color/colorOrange"
-            android:textSize="35sp" />
+            android:textSize="45sp" />
 
         <TextView
             android:id="@+id/author"

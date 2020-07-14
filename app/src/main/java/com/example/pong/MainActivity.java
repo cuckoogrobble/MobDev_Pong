@@ -339,7 +339,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         settings.setVisibility(View.INVISIBLE);
 
         //Set Timer
-
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -359,12 +358,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             } // call move(),  every gameSpeed ms, now 50 ms.
         }, 0, GAME_SPEED);
 
-
-
+        //start 'listening' accelerometer
         sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         Log.d(TAG, "startGame: Registered accelerometer listener");
-
-
     }
 
     private void resetScore() {
@@ -405,7 +401,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         statsTimer.setText(""+(currentTime - startTime) + " " +seconds);
 
        whoWon.setText((scoreLeft>scoreRight) ? youWon : youLost);
-
     }
 
     public void move() {
@@ -500,11 +495,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         xBallVel = getSign(Math.random() * 2.0 - 1);
         yBallVel = getSign(Math.random() * 2.0 - 1);
 
-
-
         ball.setX(ballX);
         ball.setY(ballY);
-
     }
 
     private int getSign(double random) {
