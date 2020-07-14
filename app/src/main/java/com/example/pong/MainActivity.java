@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     Sensor accelerometer;
 
     //Strings
-    String youWon, youLost;
+    String youWon, youLost, seconds;
 
     private static final String TAG = "MainActivity";
 
@@ -182,6 +182,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         speedAssignation = findViewById(R.id.ballSpeed);
         paddleLengthAssignation = findViewById(R.id.paddlesLength);
 
+
+        seconds = getString(R.string.seconds);
         youLost = getString(R.string.youLost);
         youWon = getString(R.string.youWon);
 
@@ -371,7 +373,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         scoreRightText.setText(""+scoreRight);
     }
 
-    @SuppressLint("SetTextI18n")
     public void gameStop() {
 
         start_flag = false;
@@ -401,7 +402,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         statScore2.setText(""+scoreRight);
         statHits1.setText(""+hits1);
         statHits2.setText(""+hits2);
-        statsTimer.setText(""+(currentTime - startTime) + " seconds");
+        statsTimer.setText(""+(currentTime - startTime) + " " +seconds);
 
        whoWon.setText((scoreLeft>scoreRight) ? youWon : youLost);
 
@@ -411,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //getting timer to move
         currentTime = System.currentTimeMillis()/1000;
-        timerText.setText("TIMER: "+(currentTime - startTime));
+        timerText.setText(getString(R.string.timerText)+" "+(currentTime - startTime));
 
         //moving ball
 

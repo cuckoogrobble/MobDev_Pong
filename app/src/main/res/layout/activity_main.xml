@@ -35,8 +35,7 @@
         <TableLayout
             android:id="@+id/statsTable"
             android:layout_width="500dp"
-            android:layout_height="match_parent"
-            android:padding="-50dp">
+            android:layout_height="match_parent">
 
 
             <TableRow android:layout_margin="5dp">
@@ -50,19 +49,26 @@
 
                 <TextView
                     android:id="@+id/titlePlayer1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:background="@color/colorGrey"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="1dp"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="@string/titlePlayer1" />
+                    android:text="@string/titlePlayer1"
+                    android:textColor="@color/colorOrange"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/titlePlayer2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGrey"
+                    android:layout_weight="2"
                     android:gravity="center"
-                    android:text="@string/titlePlayer2" />
+                    android:text="@string/titlePlayer2"
+                    android:textColor="@color/colorGreen"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -70,27 +76,31 @@
 
                 <TextView
                     android:id="@+id/scoresTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGrey"
                     android:layout_weight="1"
                     android:gravity="start"
                     android:text="@string/scoresTitle" />
 
                 <TextView
                     android:id="@+id/scorePlayer1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="@string/score1" />
+                    android:layout_marginRight="1dp"
+                    android:text="@string/score1"
+                    android:textColor="@color/colorOrange"/>
 
                 <TextView
                     android:id="@+id/scorePlayer2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
                     android:gravity="center"
-                    android:text="@string/score2" />
+                    android:text="@string/score2"
+                    android:textColor="@color/colorGreen"/>
 
             </TableRow>
 
@@ -98,43 +108,48 @@
 
                 <TextView
                     android:id="@+id/hitsTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGrey"
                     android:layout_weight="1"
                     android:gravity="start"
                     android:text="@string/hitsTitle" />
 
                 <TextView
                     android:id="@+id/hitsPlayer1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="@string/hits1" />
+                    android:layout_marginRight="1dp"
+                    android:text="@string/hits1"
+                    android:textColor="@color/colorOrange"/>
 
                 <TextView
                     android:id="@+id/hitsPlayer2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
                     android:gravity="center"
-                    android:text="@string/hits2" />
+                    android:text="@string/hits2"
+                    android:textColor="@color/colorGreen"/>
             </TableRow>
 
             <TableRow android:layout_margin="5dp">
 
                 <TextView
                     android:id="@+id/timerTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:background="@color/colorGrey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="start"
                     android:text="@string/timerTitle" />
 
                 <TextView
                     android:id="@+id/timerNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="16"
                     android:gravity="center"
                     android:text="@string/timerText" />
@@ -157,6 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/app_name"
+            android:textColor="@color/colorOrange"
             android:textSize="35sp" />
 
         <TextView
@@ -318,7 +334,7 @@
             android:id="@+id/paddleRight"
             android:layout_width="10dp"
             android:layout_height="50dp"
-            android:background="@color/colorAccent"
+            android:background="@color/colorGreen"
             android:contentDescription="@string/right_paddle" />
 
         <ImageView
