@@ -105,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager sensorManager;
     Sensor accelerometer;
 
+    //Strings
+    String youWon, youLost;
+
     private static final String TAG = "MainActivity";
 
 
@@ -178,6 +181,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         settings = findViewById(R.id.settings);
         speedAssignation = findViewById(R.id.ballSpeed);
         paddleLengthAssignation = findViewById(R.id.paddlesLength);
+
+        youLost = getString(R.string.youLost);
+        youWon = getString(R.string.youWon);
+
 
         // getting frameHeight and frameWidth
         if (frameHeight == 0) {
@@ -396,7 +403,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         statHits2.setText(""+hits2);
         statsTimer.setText(""+(currentTime - startTime) + " seconds");
 
-       whoWon.setText("YOU "+ ((scoreLeft>scoreRight) ? "WON!" : "LOST :-("));  //adding a string element xml
+       whoWon.setText((scoreLeft>scoreRight) ? youWon : youLost);
 
     }
 

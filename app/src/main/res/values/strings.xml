@@ -27,4 +27,6 @@
     <string name="scoresTitle">Score: </string>
     <string name="hitsTitle">Hits: </string>
     <string name="timerTitle">Time: </string>
+    <string name="youWon">You Won!</string>
+    <string name="youLost">You Lost :-(</string>
 </resources>
