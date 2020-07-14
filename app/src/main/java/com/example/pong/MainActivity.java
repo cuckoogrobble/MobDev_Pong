@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private ImageView net, paddleLeft, paddleRight, ball;
 
     //User values
-    ToggleButton speedAsignation, paddleLengthAsignation;
+    ToggleButton speedAssignation, paddleLengthAssignation;
 
     //Size
     private int frameHeight = 0;
@@ -55,6 +55,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     //Speed paddles
     private int paddleLeftSpeed;
     private int paddleRightSpeed;
+
+    //Left Paddle Height
+    //default
+    private static final int PADDLE_HEIGHT = 100;
+    //user defined ball speed
+    private  int userPaddleHeight = 100;
 
     //Right Paddle Velocity (direction)
     private int yPaddleVel;
@@ -134,11 +140,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        Log.d(TAG, "onSensorChanged: Y: "+ event.values[1]);
+       // Log.d(TAG, "onSensorChanged: Y: "+ event.values[1]);
         paddleLeftY += event.values[1];
 
         if (paddleLeftY < 0) paddleLeftY = 0;
-        if (paddleLeftY > frameHeight - paddleHeight) paddleLeftY = frameHeight - paddleHeight;
+        if (paddleLeftY > frameHeight - userPaddleHeight) paddleLeftY = frameHeight - userPaddleHeight;
         paddleLeft.setY(paddleLeftY);
     }
 
@@ -170,14 +176,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         endLayout = findViewById(R.id.endLayout);
         whoWon = findViewById(R.id.whoWon);
         settings = findViewById(R.id.settings);
-        speedAsignation = findViewById(R.id.ballSpeed);
-        paddleLengthAsignation = findViewById(R.id.paddlesLength);
+        speedAssignation = findViewById(R.id.ballSpeed);
+        paddleLengthAssignation = findViewById(R.id.paddlesLength);
 
         // getting frameHeight and frameWidth
         if (frameHeight == 0) {
             frameHeight = gameFrame.getHeight();
             frameWidth = gameFrame.getWidth();
             paddleHeight = paddleLeft.getHeight();
+            Log.d(TAG, "ini: PADDLE HEIGHT: " +paddleHeight);
             paddleWidth = paddleLeft.getWidth();
         }
 
@@ -195,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //getting the accelerometer sensor
 
         //toggles
-        speedAsignation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        speedAssignation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) userSpeed = 10;
                 else userSpeed = BALL_SPEED;
@@ -205,14 +212,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         Log.d(TAG, "ini: userSpeed: "+userSpeed);
 
-        paddleLengthAsignation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        paddleLengthAssignation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) paddleLeft.setMinimumHeight(2*paddleHeight);
-                else paddleLeft.setMaxHeight(paddleHeight);
+                if (isChecked) userPaddleHeight = 150;
+                else userPaddleHeight = 100;
             }
         });
-
-        Log.d(TAG, "ini: paddleLeftHeight: "+paddleLeft.getHeight());
 
 
     }
@@ -235,6 +240,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         newBall();
 
+        //initialize paddle height
+        paddleLeft.getLayoutParams().height = userPaddleHeight;
+        Log.d(TAG, "startGame: paddle height: "+userPaddleHeight);
+
         //initialize paddle speed
         paddleLeftSpeed = 15;
         paddleRightSpeed = 10;
@@ -252,6 +261,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             frameHeight = gameFrame.getHeight();
             frameWidth = gameFrame.getWidth();
             paddleHeight = paddleLeft.getHeight();
+            Log.d(TAG, "startGame: PADDLE HEIGHT: " +paddleHeight);
             paddleWidth = paddleLeft.getWidth();
         }
 
@@ -386,7 +396,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         statHits2.setText(""+hits2);
         statsTimer.setText(""+(currentTime - startTime) + " seconds");
 
-       whoWon.setText("YOU "+ ((scoreLeft>scoreRight) ? "WON!" : "LOST :-("));
+       whoWon.setText("YOU "+ ((scoreLeft>scoreRight) ? "WON!" : "LOST :-("));  //adding a string element xml
 
     }
 
@@ -430,19 +440,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //Collision with upper and lower walls
 
-        if (ballY < 0  || ballY > frameHeight - ballHeight/2){
+        if (ballY < 0  || ballY > frameHeight - ballHeight/2f){
             changeYDir();
         }
 
         //collision with paddle
 
         //position of ball
-        float ballCenterX = ballX + ballHeight/2;
-        float ballCenterY = ballY + ballHeight/2;
+        float ballCenterX = ballX + ballHeight/2f;
+        float ballCenterY = ballY + ballHeight/2f;
 
        //collision left paddle
         if ( ballCenterX >= paddleLeftX && ballCenterX <= paddleWidth + paddleLeftX &&    // the ball is in the x  axis between the left wall and the paddle
-         ballCenterY >= paddleLeftY && ballCenterY <= paddleLeftY + paddleHeight) {      //in the y axis between the upper corner (paddleLeftY) and the lower corner paddleLeftY + size
+         ballCenterY >= paddleLeftY && ballCenterY <= paddleLeftY + userPaddleHeight) {      //in the y axis between the upper corner (paddleLeftY) and the lower corner paddleLeftY + size
             changeXDir();
             hits1++;
             hits1pl.setText(""+hits1);
@@ -450,7 +460,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //collision right paddle
         if ( ballCenterX >= paddleRightX && ballCenterX <= paddleWidth + paddleRightX &&    // the ball is in the x  axis between the left wall and the paddle
-                ballCenterY >= paddleRightY && ballCenterY <= paddleRightY + paddleHeight) {      //in the y axis between the upper corner (paddleLeftY) and the lower corner paddleLeftY + size
+                ballCenterY >= paddleRightY && ballCenterY <= paddleRightY + paddleHeight) {
+            Log.d(TAG, "move: paddleHeight: "+paddleHeight);//in the y axis between the upper corner (paddleLeftY) and the lower corner paddleLeftY + size
             changeXDir();
             hits2++;
             hits2pl.setText(""+hits2);
